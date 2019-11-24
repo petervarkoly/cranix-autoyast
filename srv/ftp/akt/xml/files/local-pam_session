@@ -1,0 +1,4 @@
+#!/bin/bash
+#Fallback if no network exists
+exit 0
+

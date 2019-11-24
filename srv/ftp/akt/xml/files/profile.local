@@ -1,0 +1,31 @@
+########################
+# OSS Logonscript for UNIX
+# Copyright (c) 2011 Peter Varkoly
+########################
+GROUP=`id -gn`
+ROOM=`echo $HOSTNAME | sed s/-pc[0-6][0-9]//`
+if test -z "$ROOM"
+then
+ ROOM=`echo $test | sed s/-tpc//`
+fi
+
+export GROUP
+export ROOM
+
+if [ -e /home/profile/linux/default ]
+then
+ . /home/profile/linux/default
+fi
+if [ -e /home/profile/linux/$ROOM ]
+then
+ . /home/profile/linux/$ROOM
+fi
+if [ -e /home/profile/linux/$GROUP ]
+then
+ . /home/profile/linux/$GROUP
+fi
+if [ -e /home/profile/linux/$USER ]
+then
+ . /home/profile/linux/$USER
+fi
+

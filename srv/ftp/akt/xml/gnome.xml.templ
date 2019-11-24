@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <classes config:type="list">
+      <class>
+        <class_name>common</class_name>
+        <configuration>network.xml</configuration>
+      </class>
+      <class>
+        <class_name>common</class_name>
+        <configuration>addons.xml</configuration>
+      </class>
+      <class>
+        <class_name>common</class_name>
+        <configuration>general.xml</configuration>
+      </class>
+      <class>
+        <class_name>common</class_name>
+        <configuration>scripts.xml</configuration>
+      </class>
+      <class>
+        <class_name>common</class_name>
+        <configuration>files.xml</configuration>
+      </class>
+  </classes>
+  <partitioning config:type="list">
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>swap</mount>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">130</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>auto</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">ext4</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>acl,user_xattr</fstopt>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>/</mount>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>max</size>
+        </partition>
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <services-manager>
+    <default_target>graphical</default_target>
+    <services>
+      <disable config:type="list">
+        <service>nscd</service>
+        <service>postfix</service>
+      </disable>
+      <enable config:type="list">
+        <service>avahi-daemon</service>
+        <service>cron</service>
+        <service>cups</service>
+        <service>dm-event</service>
+        <service>getty@tty1</service>
+        <service>irqbalance</service>
+        <service>iscsi</service>
+        <service>lvm2-lvmetad</service>
+        <service>ModemManager</service>
+        <service>nfs</service>
+        <service>oss-client-init</service>
+        <service>postfix</service>
+        <service>purge-kernels</service>
+        <service>sssd</service>
+        <service>sshd</service>
+        <service>rsync</service>
+        <service>systemd-readahead-collect</service>
+        <service>systemd-readahead-replay</service>
+        <service>wicked</service>
+        <service>wickedd-auto4</service>
+        <service>wickedd-dhcp4</service>
+        <service>wickedd-dhcp6</service>
+        <service>wickedd-nanny</service>
+        <service>wickedd</service>
+        <service>wpa_supplicant</service>
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+      </enable>
+    </services>
+  </services-manager>
+  <software>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>fonts</pattern>
+      <pattern>imaging</pattern>
+      <pattern>multimedia</pattern>
+      <pattern>sw_management</pattern>
+      <pattern>x11</pattern>
+      <pattern>gnome</pattern>
+      <pattern>office</pattern>
+      <pattern>yast2_basis</pattern>
+    </patterns>
+    <packages config:type="list">
+      <package>gdm</package>
+      <package>quota</package>
+      <package>yast2-auth-client</package>
+      <package>zypper</package>
+      <package>xlockmore</package>
+      <package>autoyast2</package>
+      <package>gstreamer-fluendo-mp3</package>
+      <package>gstreamer-0_10-fluendo-mp3</package>
+      <package>gstreamer-0_10-plugin-esd</package>
+      <package>gstreamer-0_10-plugins-bad</package>
+      <package>gstreamer-0_10-plugins-ffmpeg</package>
+      <package>gstreamer-0_10-plugins-fluendo_mpegdemux</package>
+      <package>gstreamer-0_10-plugins-fluendo_mpegmux</package>
+      <package>gstreamer-0_10-plugins-good</package>
+      <package>gstreamer-0_10-plugins-good-extra</package>
+      <package>gstreamer-0_10-plugins-ugly</package>
+      <package>gstreamer-0_10-plugins-ugly-orig-addon</package>
+      <package>gstreamer-0_10-utils</package>
+      <package>gstreamer-plugins-bad</package>
+      <package>gstreamer-plugins-good</package>
+      <package>gstreamer-plugins-good-extra</package>
+      <package>gstreamer-plugins-ugly</package>
+      <package>gstreamer-plugins-ugly-orig-addon</package>
+      <package>gstreamer-plugins-vaapi</package>
+      <package>gstreamer-utils</package>
+      <package>vlc</package>
+      <package>vlc-codecs</package>
+      <package>audacity</package>
+      <package>avogadro</package>
+      <package>dia</package>
+      <package>gedit</package>
+      <package>geogebra</package>
+      <package>inkscape</package>
+      <package>kalzium</package>
+      <package>kate</package>
+      <package>stellarium</package>
+      <package>arandr</package>
+      <package>sssd</package>
+    </packages>
+    <remove-packages  config:type="list">
+      <package>gnome-packagekit</package>
+      <package>gnome-packagekit-lang</package>
+      <package>pk-update-icon</package>
+      <package>pk-update-icon-lang</package>
+      <package>gnome-keyring</package>
+      <package>gnome-keyring-lang</package>
+      <package>gnome-keyring-pam</package>
+    </remove-packages>
+  </software>
+  <sysconfig config:type="list">
+    <sysconfig_entry>
+      <sysconfig_key>RUN_PARALLEL</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/boot</sysconfig_path>
+      <sysconfig_value>no</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DEFAULT_WM</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
+      <sysconfig_value>gnome</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>gdm</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER_SHUTDOWN</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>all</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>KDM_GREETSTRING</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>Open School Server Client</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>KDM_USERS</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>no</sysconfig_value>
+    </sysconfig_entry>
+  </sysconfig>
+ <user_defaults>
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups config:type="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <username>root</username>
+      <user_password>ADMINPASSWD</user_password>
+      <encrypted config:type="boolean">true</encrypted>
+      <forename/>
+      <surname/>
+    </user>
+    <user>
+      <username>tux</username>
+      <user_password>password</user_password>
+      <encrypted config:type="boolean">false</encrypted>
+      <forename>Tux</forename>
+      <surname>Linux</surname>	  	
+    </user>
+  </users>
+</profile>

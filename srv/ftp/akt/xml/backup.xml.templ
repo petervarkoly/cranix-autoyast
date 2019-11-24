@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <files config:type="list">
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/cups/client.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/cups-client.conf</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/home/profile/linux/pam_session</file_path>
+      <file_permissions>755</file_permissions>
+      <file_location>ftp://install/akt/xml/files/local-pam_session</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/usr/sbin/oss_get_quota</file_path>
+      <file_permissions>755</file_permissions>
+      <file_contents>
+<![CDATA[#!/bin/bash
+quota -w | grep /home | gawk '{ print $2 " " $3 }'
+]]>
+      </file_contents>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/openldap/ldap.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_contents>
+<![CDATA[base    LDAPBASE
+uri     ldap://ldap
+]]>
+      </file_contents>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/profile.local</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/profile.local</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/usr/lib/systemd/system/oss-client.service</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/oss-client.service</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/sssd/sssd.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/sssd.conf</file_location>
+    </file>
+  </files>
+  <firewall>
+    <FW_ALLOW_FW_BROADCAST_DMZ></FW_ALLOW_FW_BROADCAST_DMZ>
+    <FW_ALLOW_FW_BROADCAST_EXT></FW_ALLOW_FW_BROADCAST_EXT>
+    <FW_ALLOW_FW_BROADCAST_INT></FW_ALLOW_FW_BROADCAST_INT>
+    <FW_DEV_DMZ></FW_DEV_DMZ>
+    <FW_DEV_EXT>##NET_DEV##</FW_DEV_EXT>
+    <FW_DEV_INT></FW_DEV_INT>
+    <FW_IGNORE_FW_BROADCAST_DMZ>no</FW_IGNORE_FW_BROADCAST_DMZ>
+    <FW_IGNORE_FW_BROADCAST_EXT>no</FW_IGNORE_FW_BROADCAST_EXT>
+    <FW_IGNORE_FW_BROADCAST_INT>no</FW_IGNORE_FW_BROADCAST_INT>
+    <FW_LOG_ACCEPT_ALL>no</FW_LOG_ACCEPT_ALL>
+    <FW_LOG_ACCEPT_CRIT>yes</FW_LOG_ACCEPT_CRIT>
+    <FW_LOG_DROP_ALL>no</FW_LOG_DROP_ALL>
+    <FW_LOG_DROP_CRIT>yes</FW_LOG_DROP_CRIT>
+    <FW_SERVICES_EXT_IP></FW_SERVICES_EXT_IP>
+    <FW_SERVICES_EXT_RPC>nlockmgr portmap status</FW_SERVICES_EXT_RPC>
+    <FW_SERVICES_EXT_UDP>bootpc</FW_SERVICES_EXT_UDP>
+    <enable_firewall config:type="boolean">true</enable_firewall>
+    <start_firewall config:type="boolean">true</start_firewall>
+  </firewall>
+  <deploy_image>
+    <image_installation config:type="boolean">true</image_installation>
+  </deploy_image>
+  <general>
+    <ask-list config:type="list"/>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <proposals config:type="list"/>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">true</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+    <storage>
+      <partition_alignment config:type="symbol">align_optimal</partition_alignment>
+      <start_multipath config:type="boolean">false</start_multipath>
+    </storage>
+  </general>
+  <report>    
+    <messages>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </messages>
+    <errors>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </errors>
+    <warnings>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </warnings>
+  </report>
+  <keyboard>
+    <keyboard_values>
+      <capslock config:type="boolean">false</capslock>
+      <delay></delay>
+      <discaps config:type="boolean">false</discaps>
+      <numlock></numlock>
+      <rate></rate>
+      <scrlock config:type="boolean">false</scrlock>
+      <tty>tty1 tty2 tty3 tty4 tty5 tty6 tty8 tty9 tty10 tty11 tty12 tty13 tty14 tty15 tty16 tty17 tty18 tty19 tty20</tty>
+    </keyboard_values>
+    <keymap>CURRENT_KBD</keymap>
+  </keyboard>
+  <language>
+    <language>LANGUAGE</language>
+    <languages/>
+  </language>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>TIMEZONE</timezone>
+  </timezone>
+  <sound>
+    <autoinstall config:type="boolean">true</autoinstall>
+    <configure_detected config:type="boolean">true</configure_detected>
+  </sound>
+  <login_settings/>
+  <networking>
+    <dhcp_options>
+      <dhclient_client_id/>
+      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
+    </dhcp_options>
+    <dns>
+      <dhcp_hostname config:type="boolean">true</dhcp_hostname>
+      <domain>site</domain>
+      <hostname>linux-clk4</hostname>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+      <write_hostname config:type="boolean">false</write_hostname>
+    </dns>
+    <interfaces config:type="list">
+      <interface>
+	<device>##NET_DEV##</device>
+        <bootproto>dhcp4</bootproto>
+        <startmode>auto</startmode>
+      </interface>
+      <interface>
+        <broadcast>127.255.255.255</broadcast>
+        <device>lo</device>
+        <firewall>no</firewall>
+        <ipaddr>127.0.0.1</ipaddr>
+        <netmask>255.0.0.0</netmask>
+        <network>127.0.0.0</network>
+        <prefixlen>8</prefixlen>
+        <startmode>auto</startmode>
+        <usercontrol>no</usercontrol>
+      </interface>
+    </interfaces>
+    <ipv6 config:type="boolean">false</ipv6>
+    <keep_install_network config:type="boolean">false</keep_install_network>
+    <managed config:type="boolean">false</managed>
+    <routing>
+      <ip_forward config:type="boolean">false</ip_forward>
+    </routing>
+  </networking>
+  <nfs>
+    <enable_nfs4 config:type="boolean">false</enable_nfs4>
+    <enable_nfs_gss config:type="boolean">false</enable_nfs_gss>
+    <nfs_entries config:type="list">
+      <nfs_entry>
+        <mount_point>/home</mount_point>
+        <nfs_options>defaults,acl,async,soft,bg</nfs_options>
+        <server_path>nfs:/home</server_path>
+        <vfstype>nfs</vfstype>
+      </nfs_entry>
+    </nfs_entries>
+  </nfs>
+  <ntp-client>
+    <ntp_policy>auto</ntp_policy>
+    <peers config:type="list">
+      <peer>
+        <address>/var/lib/ntp/drift/ntp.drift  </address>
+        <comment>################################################################################
+## /etc/ntp.conf
+##
+## Sample NTP configuration file.
+## See package 'ntp-doc' for documentation, Mini-HOWTO and FAQ.
+## Copyright (c) 1998 S.u.S.E. GmbH Fuerth, Germany.
+##
+## Author: Michael Andres,  &lt;ma@suse.de&gt;
+##         Michael Skibbe,  &lt;mskibbe@suse.de&gt;
+##
+################################################################################
+
+##
+## Radio and modem clocks by convention have addresses in the
+## form 127.127.t.u, where t is the clock type and u is a unit
+## number in the range 0-3.
+##
+## Most of these clocks require support in the form of a
+## serial port or special bus peripheral. The particular
+## device is normally specified by adding a soft link
+## /dev/device-u to the particular hardware device involved,
+## where u correspond to the unit number above.
+##
+## Generic DCF77 clock on serial port (Conrad DCF77)
+## Address:     127.127.8.u
+## Serial Port: /dev/refclock-u
+##
+## (create soft link /dev/refclock-0 to the particular ttyS?)
+##
+# server 127.127.8.0 mode 5 prefer
+
+##
+## Undisciplined Local Clock. This is a fake driver intended for backup
+## and when no outside source of synchronized time is available.
+##
+# server 127.127.1.0            # local clock (LCL)
+# fudge  127.127.1.0 stratum 10 # LCL is unsynchronized
+
+##
+## Add external Servers using
+## # rcntp addserver &lt;yourserver&gt;
+##
+
+##
+## Miscellaneous stuff
+##
+
+</comment>
+        <options/>
+        <type>driftfile</type>
+      </peer>
+      <peer>
+        <address>/var/log/ntp            </address>
+        <comment># path for drift file
+
+</comment>
+        <options/>
+        <type>logfile</type>
+      </peer>
+      <peer>
+        <address>/etc/ntp.keys           </address>
+        <comment># alternate log file
+# logconfig =syncstatus + sysevents
+# logconfig =all
+
+# statsdir /tmp/                # directory for statistics files
+# filegen peerstats  file peerstats  type day enable
+# filegen loopstats  file loopstats  type day enable
+# filegen clockstats file clockstats type day enable
+
+#
+# Authentication stuff
+#
+</comment>
+        <options/>
+        <type>keys</type>
+      </peer>
+      <peer>
+        <address>1                       </address>
+        <comment># path for keys file
+</comment>
+        <options/>
+        <type>trustedkey</type>
+      </peer>
+      <peer>
+        <address>1                       </address>
+        <comment># define trusted keys
+</comment>
+        <options/>
+        <type>requestkey</type>
+      </peer>
+      <peer>
+        <address>timeserver</address>
+        <comment/>
+        <options> iburst</options>
+        <type>server</type>
+      </peer>
+    </peers>
+    <start_at_boot config:type="boolean">true</start_at_boot>
+    <start_in_chroot config:type="boolean">false</start_in_chroot>
+    <sync_interval config:type="integer">5</sync_interval>
+    <synchronize_time config:type="boolean">true</synchronize_time>
+  </ntp-client>
+  <proxy>
+    <enabled config:type="boolean">true</enabled>
+    <ftp_proxy>http://proxy:8080/</ftp_proxy>
+    <http_proxy>http://proxy:8080/</http_proxy>
+    <https_proxy>http://proxy:8080/</https_proxy>
+    <no_proxy>admin, install, schulserver, schoolserver, .DOMAIN</no_proxy>
+    <proxy_password></proxy_password>
+    <proxy_user></proxy_user>
+  </proxy>
+  <partitioning config:type="list">
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>swap</mount>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">130</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>auto</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">ext4</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>acl,user_xattr</fstopt>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>/</mount>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>max</size>
+        </partition>
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <services-manager>
+    <default_target>graphical</default_target>
+    <services>
+      <disable config:type="list">
+        <service>nscd</service>
+        <service>postfix</service>
+      </disable>
+      <enable config:type="list">
+        <service>avahi-daemon</service>
+        <service>cron</service>
+        <service>cups</service>
+        <service>dm-event</service>
+        <service>getty@tty1</service>
+        <service>irqbalance</service>
+        <service>iscsi</service>
+        <service>lvm2-lvmetad</service>
+        <service>ModemManager</service>
+        <service>nfs</service>
+        <service>oss-client-init</service>
+        <service>postfix</service>
+        <service>purge-kernels</service>
+        <service>sshd</service>
+        <service>sssd</service>
+        <service>systemd-readahead-collect</service>
+        <service>systemd-readahead-replay</service>
+        <service>wicked</service>
+        <service>wickedd-auto4</service>
+        <service>wickedd-dhcp4</service>
+        <service>wickedd-dhcp6</service>
+        <service>wickedd-nanny</service>
+        <service>wickedd</service>
+        <service>wpa_supplicant</service>
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+      </enable>
+    </services>
+  </services-manager>
+  <scripts>
+    <pre-scripts config:type="list">
+      <script>
+        <feedback config:type="boolean">true</feedback>
+        <debug config:type="boolean">false</debug>
+        <filename>10_check-hw.sh</filename>
+        <source><![CDATA[DEV=$( /sbin/ip link | grep 'state UP' | gawk -F': ' '{ print $2 }' )
+sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
+]]></source>
+      </script>
+    </pre-scripts>
+    <chroot-scripts config:type="list"/>
+    <post-scripts config:type="list">
+      <script>
+        <filename>root-desktop</filename>
+        <interpreter>shell</interpreter>
+        <source>
+<![CDATA[test -e /root/.ssh/ || mkdir /root/.ssh/
+echo 'KEYROOT' >> /root/.ssh/authorized_keys
+chmod 600 /root/.ssh/authorized_keys
+echo 'syntax on' >> /root/.exrc
+sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfirewall2
+]]>
+        </source>
+      </script>
+    </post-scripts>
+  </scripts>
+  <software>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+    </patterns>
+    <post-packages config:type="list">
+      <package>yast2-auth-client</package>
+      <package>zypper</package>
+      <package>xlockmore</package>
+      <package>autoyast2</package>
+      <package>rsync</package>
+      <package>sshd</package>
+      <package>sssd</package>
+    </post-packages>
+    <post-patterns config:type="list">
+      <pattern>enhanced_base</pattern>
+      <pattern>fonts</pattern>
+      <pattern>imaging</pattern>
+      <pattern>multimedia</pattern>
+      <pattern>sw_management</pattern>
+      <pattern>x11</pattern>
+      <pattern>xfce</pattern>
+      <pattern>xfce_basis</pattern>
+      <pattern>office</pattern>
+      <pattern>yast2_basis</pattern>
+    </post-patterns>
+  </software>
+  <sysconfig config:type="list">
+    <sysconfig_entry>
+      <sysconfig_key>RUN_PARALLEL</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/boot</sysconfig_path>
+      <sysconfig_value>no</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DEFAULT_WM</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
+      <sysconfig_value>xfce</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>xdm</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER_SHUTDOWN</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>all</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>KDM_GREETSTRING</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>Open School Server Client</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>KDM_USERS</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>no</sysconfig_value>
+    </sysconfig_entry>
+  </sysconfig>
+ <user_defaults>
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups config:type="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <username>root</username>
+      <user_password>ADMINPASSWD</user_password>
+      <encrypted config:type="boolean">true</encrypted>
+      <forename/>
+      <surname/>
+    </user>
+    <user>
+      <username>tux</username>
+      <user_password>password</user_password>
+      <encrypted config:type="boolean">false</encrypted>
+      <forename>Tux</forename>
+      <surname>Linux</surname>	  	
+    </user>
+  </users>
+</profile>

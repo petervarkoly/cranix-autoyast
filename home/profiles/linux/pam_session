@@ -1,0 +1,32 @@
+#!/bin/bash -x
+# Copyright (c) Peter Varkoly <peter@varkoly.de> Nürnberg, Germany.  All rights reserved.
+# Thanks for the help of Frank Schuette !!!
+read p
+#rm /tmp/pw
+#date >> /tmp/pw
+#set >> /tmp/pw
+#echo "pw:$p" >> /tmp/pw
+if [ "$PAM_USER" = "root" ]
+then
+        exit 0;
+fi
+if [ "$PAM_TYPE" = "auth" ]; then
+    #echo  curl --insecure -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: text/plain' --data-urlencode "username=$PAM_USER" --data-urlencode "password=$p" 'https://admin/api/sessions/login' > /tmp/logon
+    TOKEN=$( curl --insecure -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: text/plain' --data-urlencode "username=$PAM_USER" --data-urlencode "password=$p"  'https://admin/api/sessions/login' )
+    if [ "$TOKEN"  -a "${TOKEN:0:7}" != '{"code"' ]
+    then
+        echo $TOKEN > /tmp/TOKEN
+        exit 0
+    else
+        exit 1
+    fi
+fi
+if [ "$PAM_TYPE" = "close_session" ]; then
+    if [ $PAM_SERVICE = "gdm" -o $PAM_SERVICE = "kdm" -o $PAM_SERVICE = "login" -o $PAM_SERVICE = "xdm" -o $PAM_SERVICE = "sddm" ]; then
+        TOKEN=$( cat /tmp/TOKEN )
+        curl --insecure -X DELETE --header 'Content-Type: application/x-www-form-urlencoded' --header "Authorization: Bearer $TOKEN" "https://admin/api/sessions/$TOKEN"
+        rm -r /tmp/TOKEN
+    fi
+    exit 0
+fi
+

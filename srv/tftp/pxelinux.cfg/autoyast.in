@@ -1,0 +1,57 @@
+default         menu.c32
+KBDMAP          german.kbd
+timeout         100
+prompt          0
+allowoptions    1
+noescape        0
+ui              gfxboot bootlogo
+
+menu master passwd SHA1PASS
+menu title OSS V3.4.1 PXE Boot Enviroment
+
+LABEL Festplatte
+	LOCALBOOT 0
+
+LABEL Starte Linux X Terminal
+        KERNEL xterm/vmlinuz 
+	APPEND initrd=xterm/initrd root=/dev/ram ramdisk_size=32768
+
+LABEL Backup Server installieren
+        KERNEL linux
+        APPEND initrd=initrd autoyast=ftp://install/akt/xml/backup.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL XFCE Autoinstallation
+        KERNEL linux
+        APPEND initrd=initrd autoyast=ftp://install/akt/xml/std.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL KDE Autoinstallation
+        KERNEL linux
+        APPEND initrd=initrd autoyast=ftp://install/akt/xml/kde.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Gnome Autoinstallation
+        KERNEL linux
+        APPEND initrd=initrd autoyast=ftp://install/akt/xml/gnome.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Linux Autoinstallation + Windows Partition
+        KERNEL linux 
+	APPEND initrd=initrd autoyast=ftp://install/akt/xml/std+win.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Linux Autoinstallation mit vorhandener Windows Partition
+        KERNEL linux 
+	APPEND initrd=initrd autoyast=ftp://install/akt/xml/windows_exists.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Linux manuelle Installation
+        KERNEL linux 
+	APPEND initrd=initrd install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Linux ThinClient Autoinstallation
+        KERNEL linux 
+	APPEND initrd=initrd autoyast=ftp://install/akt/xml/thinclient.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Linux Terminalserver Autoinstallation
+        KERNEL linux 
+	APPEND initrd=initrd autoyast=ftp://install/akt/xml/terminalserver.xml install=ftp://install/akt/CD1/ insecure=1
+
+LABEL Hauptmenü
+      CONFIG pxelinux.cfg/default
+

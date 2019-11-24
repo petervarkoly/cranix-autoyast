@@ -1,0 +1,12 @@
+[Unit]
+Description=OSS-Client startup script
+After=remote-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/software/oss/linux/start-oss-client
+ExecStop=/usr/sbin/stop-oss-client
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

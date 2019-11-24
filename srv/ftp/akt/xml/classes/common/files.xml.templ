@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <files config:type="list">
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/cups/client.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/cups-client.conf</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/home/profile/linux/pam_session</file_path>
+      <file_permissions>755</file_permissions>
+      <file_location>ftp://install/akt/xml/files/local-pam_session</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/usr/sbin/oss_get_quota</file_path>
+      <file_permissions>755</file_permissions>
+      <file_contents>
+<![CDATA[#!/bin/bash
+quota -w | grep /home | gawk '{ print $2 " " $3 }'
+]]>
+      </file_contents>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/openldap/ldap.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_contents>
+<![CDATA[base    LDAPBASE
+uri     ldap://ldap
+]]>
+      </file_contents>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/profile.local</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/profile.local</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/usr/lib/systemd/system/oss-client.service</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/oss-client.service</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/sssd/sssd.conf</file_path>
+      <file_permissions>600</file_permissions>
+      <file_location>ftp://install/akt/xml/files/sssd.conf</file_location>
+    </file>
+  </files>
+</profile>

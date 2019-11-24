@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <deploy_image>
+    <image_installation config:type="boolean">true</image_installation>
+  </deploy_image>
+  <general>
+    <ask-list config:type="list">
+      <!-- BEGIN Dialog 0 - Admin Password -->
+      <ask>
+         <title>Domain Administrator Password</title>
+         <dialog config:type="integer">0</dialog>
+         <element config:type="integer">0</element>
+         <width config:type="integer">60</width>
+         <height config:type="integer">10</height>
+         <help><![CDATA[
+         <p><b>Domain Administrator Password</b> Enter and the Domain Administrator password.
+         </p>
+         ]]>
+         </help>
+         <file>/tmp/may_q_masterpass</file>
+         <question>Domain Administrator Password</question>
+         <password config:type="boolean">true</password>
+         <stage>initial</stage>
+         <default></default>
+         <script>
+            <filename>my_pwd.sh</filename>
+            <rerun_on_error config:type="boolean">true</rerun_on_error>
+            <environment config:type="boolean">true</environment>
+            <source><![CDATA[
+echo "user=Administrator
+password=$( cat /tmp/may_q_masterpass )" > /tmp/credentials
+chmod 400 /tmp/credentials
+mkdir -p /tmp/mnt/
+mount.cifs //install/itool /tmp/mnt -o credentials=/tmp/credentials
+if [ $? -ne 0 ]; then
+        echo 'You must provide the Domain administrator password for your installation!'
+        exit 1
+fi
+umount /tmp/mnt/
+exit 0
+]]>
+            </source>
+            <debug config:type="boolean">false</debug>
+            <feedback config:type="boolean">true</feedback>
+         </script>
+      </ask>
+    </ask-list>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <proposals config:type="list"/>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">true</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+    <storage>
+      <partition_alignment config:type="symbol">align_optimal</partition_alignment>
+      <start_multipath config:type="boolean">false</start_multipath>
+    </storage>
+  </general>
+  <report>
+    <messages>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </messages>
+    <errors>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </errors>
+    <warnings>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </warnings>
+  </report>
+  <keyboard>
+    <keyboard_values>
+      <capslock config:type="boolean">false</capslock>
+      <delay></delay>
+      <discaps config:type="boolean">false</discaps>
+      <numlock></numlock>
+      <rate></rate>
+      <scrlock config:type="boolean">false</scrlock>
+      <tty>tty1 tty2 tty3 tty4 tty5 tty6 tty8 tty9 tty10 tty11 tty12 tty13 tty14 tty15 tty16 tty17 tty18 tty19 tty20</tty>
+    </keyboard_values>
+    <keymap>CURRENT_KBD</keymap>
+  </keyboard>
+  <language>
+    <language>LANGUAGE</language>
+    <languages/>
+  </language>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>TIMEZONE</timezone>
+  </timezone>
+  <sound>
+    <autoinstall config:type="boolean">true</autoinstall>
+    <configure_detected config:type="boolean">true</configure_detected>
+  </sound>
+</profile>
+

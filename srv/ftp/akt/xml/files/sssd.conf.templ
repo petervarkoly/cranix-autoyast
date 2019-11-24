@@ -1,0 +1,35 @@
+[sssd]
+domains = default
+config_file_version = 2
+services = nss,pam
+debug_level = 9
+
+[nss]
+filter_groups = root
+filter_users = root
+
+[pam]
+
+[domain/default]
+debug_level = 9
+ldap_tls_reqcert = never
+auth_provider = ldap
+id_provider = ldap
+ldap_schema = ad
+override_shell = /bin/bash
+ldap_id_use_start_tls = False
+ldap_user_shell = /bin/bash
+ldap_search_base = BASEDN
+ldap_uri = ldap://ldap
+enumerate = true
+ldap_default_bind_dn = READERDN
+ldap_default_authtok = ossreader
+ldap_referrals = false
+ldap_user_object_class = user
+ldap_user_name = cn
+ldap_group_object_class = group
+ldap_user_home_directory = unixHomeDirectory
+[autofs]
+
+
+
