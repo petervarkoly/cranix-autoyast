@@ -3,7 +3,7 @@
 . /etc/sysconfig/keyboard
 . /etc/sysconfig/schoolserver
 if [ ! -e /root/.ssh/id_rsa.pub ]; then
-	/usr/bin/ssh-keygen -t rsa -N '' -f .ssh/id_rsa
+	/usr/bin/ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
 	cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 fi
 keyroot=`cat /root/.ssh/id_rsa.pub`
