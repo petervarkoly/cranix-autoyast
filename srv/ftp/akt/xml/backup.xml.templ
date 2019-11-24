@@ -4,38 +4,6 @@
   <files config:type="list">
     <file>
       <file_owner>root</file_owner>
-      <file_path>/etc/cups/client.conf</file_path>
-      <file_permissions>644</file_permissions>
-      <file_location>ftp://install/akt/xml/files/cups-client.conf</file_location>
-    </file>
-    <file>
-      <file_owner>root</file_owner>
-      <file_path>/home/profile/linux/pam_session</file_path>
-      <file_permissions>755</file_permissions>
-      <file_location>ftp://install/akt/xml/files/local-pam_session</file_location>
-    </file>
-    <file>
-      <file_owner>root</file_owner>
-      <file_path>/usr/sbin/oss_get_quota</file_path>
-      <file_permissions>755</file_permissions>
-      <file_contents>
-<![CDATA[#!/bin/bash
-quota -w | grep /home | gawk '{ print $2 " " $3 }'
-]]>
-      </file_contents>
-    </file>
-    <file>
-      <file_owner>root</file_owner>
-      <file_path>/etc/openldap/ldap.conf</file_path>
-      <file_permissions>644</file_permissions>
-      <file_contents>
-<![CDATA[base    LDAPBASE
-uri     ldap://ldap
-]]>
-      </file_contents>
-    </file>
-    <file>
-      <file_owner>root</file_owner>
       <file_path>/etc/profile.local</file_path>
       <file_permissions>644</file_permissions>
       <file_location>ftp://install/akt/xml/files/profile.local</file_location>
@@ -54,12 +22,12 @@ uri     ldap://ldap
     </file>
   </files>
   <firewall>
-    <FW_ALLOW_FW_BROADCAST_DMZ></FW_ALLOW_FW_BROADCAST_DMZ>
-    <FW_ALLOW_FW_BROADCAST_EXT></FW_ALLOW_FW_BROADCAST_EXT>
-    <FW_ALLOW_FW_BROADCAST_INT></FW_ALLOW_FW_BROADCAST_INT>
-    <FW_DEV_DMZ></FW_DEV_DMZ>
+    <FW_ALLOW_FW_BROADCAST_DMZ/>
+    <FW_ALLOW_FW_BROADCAST_EXT/>
+    <FW_ALLOW_FW_BROADCAST_INT/>
+    <FW_DEV_DMZ/>
     <FW_DEV_EXT>##NET_DEV##</FW_DEV_EXT>
-    <FW_DEV_INT></FW_DEV_INT>
+    <FW_DEV_INT/>
     <FW_IGNORE_FW_BROADCAST_DMZ>no</FW_IGNORE_FW_BROADCAST_DMZ>
     <FW_IGNORE_FW_BROADCAST_EXT>no</FW_IGNORE_FW_BROADCAST_EXT>
     <FW_IGNORE_FW_BROADCAST_INT>no</FW_IGNORE_FW_BROADCAST_INT>
@@ -67,7 +35,7 @@ uri     ldap://ldap
     <FW_LOG_ACCEPT_CRIT>yes</FW_LOG_ACCEPT_CRIT>
     <FW_LOG_DROP_ALL>no</FW_LOG_DROP_ALL>
     <FW_LOG_DROP_CRIT>yes</FW_LOG_DROP_CRIT>
-    <FW_SERVICES_EXT_IP></FW_SERVICES_EXT_IP>
+    <FW_SERVICES_EXT_IP/>
     <FW_SERVICES_EXT_RPC>nlockmgr portmap status</FW_SERVICES_EXT_RPC>
     <FW_SERVICES_EXT_UDP>bootpc</FW_SERVICES_EXT_UDP>
     <enable_firewall config:type="boolean">true</enable_firewall>
@@ -95,7 +63,7 @@ uri     ldap://ldap
       <start_multipath config:type="boolean">false</start_multipath>
     </storage>
   </general>
-  <report>    
+  <report>
     <messages>
       <show config:type="boolean">true</show>
       <timeout config:type="integer">10</timeout>
@@ -115,10 +83,10 @@ uri     ldap://ldap
   <keyboard>
     <keyboard_values>
       <capslock config:type="boolean">false</capslock>
-      <delay></delay>
+      <delay/>
       <discaps config:type="boolean">false</discaps>
-      <numlock></numlock>
-      <rate></rate>
+      <numlock/>
+      <rate/>
       <scrlock config:type="boolean">false</scrlock>
       <tty>tty1 tty2 tty3 tty4 tty5 tty6 tty8 tty9 tty10 tty11 tty12 tty13 tty14 tty15 tty16 tty17 tty18 tty19 tty20</tty>
     </keyboard_values>
@@ -138,54 +106,66 @@ uri     ldap://ldap
   </sound>
   <login_settings/>
   <networking>
-    <dhcp_options>
-      <dhclient_client_id/>
-      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
-    </dhcp_options>
     <dns>
-      <dhcp_hostname config:type="boolean">true</dhcp_hostname>
-      <domain>site</domain>
-      <hostname>linux-clk4</hostname>
+      <dhcp_hostname config:type="boolean">false</dhcp_hostname>
+      <hostname>backup</hostname>
+      <nameservers config:type="list">
+        <nameserver>@SERVER@</nameserver>
+      </nameservers>
       <resolv_conf_policy>auto</resolv_conf_policy>
+      <searchlist config:type="list">
+        <search>DOMAIN</search>
+      </searchlist>
       <write_hostname config:type="boolean">false</write_hostname>
     </dns>
     <interfaces config:type="list">
       <interface>
-	<device>##NET_DEV##</device>
-        <bootproto>dhcp4</bootproto>
+        <bootproto>static</bootproto>
+        <device>##NET_DEV##</device>
+        <ipaddr>BACKUP_SERVER</ipaddr>
+        <netmask>NETMASK</netmask>
+        <prefixlen>16</prefixlen>
         <startmode>auto</startmode>
       </interface>
       <interface>
-        <broadcast>127.255.255.255</broadcast>
+        <bootproto>static</bootproto>
         <device>lo</device>
         <firewall>no</firewall>
         <ipaddr>127.0.0.1</ipaddr>
         <netmask>255.0.0.0</netmask>
         <network>127.0.0.0</network>
         <prefixlen>8</prefixlen>
-        <startmode>auto</startmode>
+        <startmode>nfsroot</startmode>
         <usercontrol>no</usercontrol>
       </interface>
     </interfaces>
-    <ipv6 config:type="boolean">false</ipv6>
-    <keep_install_network config:type="boolean">false</keep_install_network>
-    <managed config:type="boolean">false</managed>
+    <ipv6 config:type="boolean">true</ipv6>
+    <keep_install_network config:type="boolean">true</keep_install_network>
+    <managed config:type="boolean">true</managed>
     <routing>
-      <ip_forward config:type="boolean">false</ip_forward>
+      <ipv4_forward config:type="boolean">false</ipv4_forward>
+      <ipv6_forward config:type="boolean">false</ipv6_forward>
+      <routes config:type="list">
+        <route>
+          <destination>default</destination>
+          <device>##NET_DEV##</device>
+          <gateway>GATEWAY</gateway>
+          <netmask>-</netmask>
+        </route>
+      </routes>
     </routing>
   </networking>
-  <nfs>
-    <enable_nfs4 config:type="boolean">false</enable_nfs4>
-    <enable_nfs_gss config:type="boolean">false</enable_nfs_gss>
-    <nfs_entries config:type="list">
-      <nfs_entry>
-        <mount_point>/home</mount_point>
-        <nfs_options>defaults,acl,async,soft,bg</nfs_options>
-        <server_path>nfs:/home</server_path>
-        <vfstype>nfs</vfstype>
-      </nfs_entry>
-    </nfs_entries>
-  </nfs>
+  <nfs_server>
+    <nfs_exports config:type="list">
+      <nfs_export>
+        <allowed config:type="list">
+          <allowed_clients>@SERVER@(rw,no_root_squash,sync,no_subtree_check)</allowed_clients>
+        </allowed>
+        <mountpoint>/backup</mountpoint>
+      </nfs_export>
+    </nfs_exports>
+    <start_nfsserver config:type="boolean">true</start_nfsserver>
+  </nfs_server>
   <ntp-client>
     <ntp_policy>auto</ntp_policy>
     <peers config:type="list">
@@ -300,8 +280,8 @@ uri     ldap://ldap
     <http_proxy>http://proxy:8080/</http_proxy>
     <https_proxy>http://proxy:8080/</https_proxy>
     <no_proxy>admin, install, schulserver, schoolserver, .DOMAIN</no_proxy>
-    <proxy_password></proxy_password>
-    <proxy_user></proxy_user>
+    <proxy_password/>
+    <proxy_user/>
   </proxy>
   <partitioning config:type="list">
     <drive>
@@ -333,6 +313,20 @@ uri     ldap://ldap
           <partition_id config:type="integer">131</partition_id>
           <partition_nr config:type="integer">2</partition_nr>
           <resize config:type="boolean">false</resize>
+          <size>20G</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">xfs</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>/backup</mount>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <resize config:type="boolean">false</resize>
           <size>max</size>
         </partition>
       </partitions>
@@ -349,16 +343,12 @@ uri     ldap://ldap
         <service>postfix</service>
       </disable>
       <enable config:type="list">
-        <service>avahi-daemon</service>
         <service>cron</service>
         <service>cups</service>
         <service>dm-event</service>
         <service>getty@tty1</service>
         <service>irqbalance</service>
-        <service>iscsi</service>
         <service>lvm2-lvmetad</service>
-        <service>ModemManager</service>
-        <service>nfs</service>
         <service>oss-client-init</service>
         <service>postfix</service>
         <service>purge-kernels</service>
@@ -367,14 +357,9 @@ uri     ldap://ldap
         <service>systemd-readahead-collect</service>
         <service>systemd-readahead-replay</service>
         <service>wicked</service>
-        <service>wickedd-auto4</service>
-        <service>wickedd-dhcp4</service>
-        <service>wickedd-dhcp6</service>
         <service>wickedd-nanny</service>
         <service>wickedd</service>
         <service>wpa_supplicant</service>
-        <service>YaST2-Firstboot</service>
-        <service>YaST2-Second-Stage</service>
       </enable>
     </services>
   </services-manager>
@@ -394,42 +379,33 @@ sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
       <script>
         <filename>root-desktop</filename>
         <interpreter>shell</interpreter>
-        <source>
-<![CDATA[test -e /root/.ssh/ || mkdir /root/.ssh/
+        <source><![CDATA[test -e /root/.ssh/ || mkdir /root/.ssh/
 echo 'KEYROOT' >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'syntax on' >> /root/.exrc
 sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfirewall2
-]]>
-        </source>
+]]></source>
       </script>
     </post-scripts>
   </scripts>
   <software>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <!-- instsource>http://download.opensuse.org/distribution/leap/15.1/repo/oss/</instsource -->
     <patterns config:type="list">
+      <pattern>file_server</pattern>
+      <pattern>minimal_base</pattern>
+      <pattern>basesystem</pattern>
       <pattern>base</pattern>
     </patterns>
-    <post-packages config:type="list">
-      <package>yast2-auth-client</package>
+    <packages config:type="list">
+      <package>nfs-kernel-server</package>
+      <package>yast2-nfs-server</package>
       <package>zypper</package>
       <package>xlockmore</package>
       <package>autoyast2</package>
       <package>rsync</package>
-      <package>sshd</package>
-      <package>sssd</package>
-    </post-packages>
-    <post-patterns config:type="list">
-      <pattern>enhanced_base</pattern>
-      <pattern>fonts</pattern>
-      <pattern>imaging</pattern>
-      <pattern>multimedia</pattern>
-      <pattern>sw_management</pattern>
-      <pattern>x11</pattern>
-      <pattern>xfce</pattern>
-      <pattern>xfce_basis</pattern>
-      <pattern>office</pattern>
-      <pattern>yast2_basis</pattern>
-    </post-patterns>
+      <package>vim</package>
+    </packages>
   </software>
   <sysconfig config:type="list">
     <sysconfig_entry>
@@ -463,7 +439,7 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfi
       <sysconfig_value>no</sysconfig_value>
     </sysconfig_entry>
   </sysconfig>
- <user_defaults>
+  <user_defaults>
     <expire/>
     <group>100</group>
     <groups/>
@@ -487,7 +463,7 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfi
       <user_password>password</user_password>
       <encrypted config:type="boolean">false</encrypted>
       <forename>Tux</forename>
-      <surname>Linux</surname>	  	
+      <surname>Linux</surname>
     </user>
   </users>
 </profile>

@@ -2,11 +2,13 @@
 . /etc/sysconfig/clock
 . /etc/sysconfig/keyboard
 . /etc/sysconfig/schoolserver
-
-keyroot=`cat /root/.ssh/id_dsa.pub`
+if [ ! -e /root/.ssh/id_rsa.pub ]; then
+	/usr/bin/ssh-keygen -t rsa -N '' -f .ssh/id_rsa
+	cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+fi
+keyroot=`cat /root/.ssh/id_rsa.pub`
 LANGUAGE=${LANG:0:5}
 crypt_root_password=`cat /etc/shadow | gawk -F : ' /^root/ { print $2 }'`
-schoolservername="schulserver"
 current_kbd=`echo $YAST_KEYBOARD | gawk -F , '{ print $1 }'`
 READERDN=$( oss_get_dn.sh ossreader | sed 's/dn: //' )
 BASEDN=$( ldbsearch -H /var/lib/samba/private/sam.ldb objectClass=domain dn | grep dn: | sed 's/dn: //' )
