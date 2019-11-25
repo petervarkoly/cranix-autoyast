@@ -439,16 +439,6 @@ echo "session    required        pam_exec.so /home/profile/linux/pam_session" >>
   <software>
     <patterns config:type="list">
       <pattern>base</pattern>
-    </patterns>
-    <post-packages config:type="list">
-      <package>yast2-auth-client</package>
-      <package>zypper</package>
-      <package>autoyast2</package>
-      <service>rsync</service>
-      <service>sshd</service>
-      <package>sssd</package>
-    </post-packages>
-    <post-patterns config:type="list">
       <pattern>enhanced_base</pattern>
       <pattern>fonts</pattern>
       <pattern>imaging</pattern>
@@ -459,7 +449,16 @@ echo "session    required        pam_exec.so /home/profile/linux/pam_session" >>
       <pattern>xfce_basis</pattern>
       <pattern>office</pattern>
       <pattern>yast2_basis</pattern>
-    </post-patterns>
+    </patterns>
+    <packages config:type="list">
+      <package>yast2-auth-client</package>
+      <package>zypper</package>
+      <package>autoyast2</package>
+      <service>rsync</service>
+      <service>sshd</service>
+      <package>SuSEfirewall2</package>
+      <package>sssd</package>
+    </packages>
   </software>
   <sysconfig config:type="list">
     <sysconfig_entry>

@@ -403,8 +403,19 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfi
       <package>zypper</package>
       <package>autoyast2</package>
       <package>rsync</package>
+      <package>SuSEfirewall2</package>
       <package>vim</package>
     </packages>
+    <remove-packages  config:type="list">
+      <package>firewalld</package>
+      <package>gnome-packagekit</package>
+      <package>gnome-packagekit-lang</package>
+      <package>pk-update-icon</package>
+      <package>pk-update-icon-lang</package>
+      <package>gnome-keyring</package>
+      <package>gnome-keyring-lang</package>
+      <package>gnome-keyring-pam</package>
+    </remove-packages>
   </software>
   <sysconfig config:type="list">
     <sysconfig_entry>

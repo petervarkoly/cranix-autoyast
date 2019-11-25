@@ -814,18 +814,17 @@ echo "session    required        pam_exec.so /home/profile/linux/pam_session" >>
   <software>
     <patterns config:type="list">
       <pattern>base</pattern>
+      <pattern>fonts</pattern>
+      <pattern>x11</pattern>
     </patterns>
-    <post-packages config:type="list">
+    <packages config:type="list">
       <package>yast2-auth-client</package>
       <service>rsync</service>
       <package>zypper</package>
       <package>autoyast2</package>
       <package>oss-client-control-daemon-tc</package>
-    </post-packages>
-    <post-patterns config:type="list">
-      <pattern>fonts</pattern>
-      <pattern>x11</pattern>
-    </post-patterns>
+      <package>SuSEfirewall2</package>
+    </packages>
   </software>
   <sysconfig config:type="list">
     <sysconfig_entry>
@@ -836,7 +835,7 @@ echo "session    required        pam_exec.so /home/profile/linux/pam_session" >>
     <sysconfig_entry>
       <sysconfig_key>DEFAULT_WM</sysconfig_key>
       <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
-      <sysconfig_value>xfce</sysconfig_value>
+      <sysconfig_value>kde</sysconfig_value>
     </sysconfig_entry>
     <sysconfig_entry>
       <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
