@@ -12,6 +12,7 @@ PACKAGE         = oss-autoyast2
 
 install:
 	mkdir -p $(DESTDIR)/usr/share/oss/templates/autoyast/
+	mkdir -p $(DESTDIR)/srv/ftp/akt/CD1
 	rsync -av etc/       $(DESTDIR)/etc/
 	rsync -av templates/ $(DESTDIR)/usr/share/oss/templates/autoyast/
 	rsync -av srv/       $(DESTDIR)/srv/
