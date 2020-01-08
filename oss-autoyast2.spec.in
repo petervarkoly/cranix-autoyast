@@ -33,7 +33,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Package to create autoyast2 installation environment on CRANIX server for openLeap clients
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 
@@ -46,6 +46,14 @@ Package to create autoyast2 installation environment on CRANIX server for openLe
 %files
 %defattr(-,root,root)
 %doc ChangeLog README COPYING
-
+/srv/tftp/pxelinux.cfg/autoyast.in
+/etc/xinetd.d/vsftpd.in
+/etc/vsftpd.conf.in
+%dir /srv/ftp/akt
+%dir /srv/ftp/akt/CD1
+/srv/ftp/akt/xml
+/usr/sbin/oss_setup_openSUSE_repositories.sh
+/usr/sbin/oss_config_xml_files.sh
+/usr/share/oss/templates/autoyast
 %changelog
 
