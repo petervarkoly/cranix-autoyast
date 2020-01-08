@@ -2,7 +2,7 @@
 # Copyright (c) Peter Varkoly Nürnberg, Germany.  All rights reserved.
 #
 DESTDIR         = /
-TOPACKAGE       = Makefile etc  home  LICENSE  README.md  srv  usr
+TOPACKAGE       = Makefile etc  templates  LICENSE  README.md  srv  usr
 VERSION         = $(shell test -e ../VERSION && cp ../VERSION VERSION ; cat VERSION)
 RELEASE         = $(shell cat RELEASE )
 NRELEASE        = $(shell echo $(RELEASE) + 1 | bc )
