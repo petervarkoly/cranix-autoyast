@@ -45,7 +45,7 @@ Package to create autoyast2 installation environment on CRANIX server for openLe
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog README COPYING
+%doc README.md
 /srv/tftp/pxelinux.cfg/autoyast.in
 /etc/xinetd.d/vsftpd.in
 /etc/vsftpd.conf.in
