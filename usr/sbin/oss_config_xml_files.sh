@@ -42,3 +42,6 @@ for i in /srv/tftp/pxelinux.cfg/autoyast*in
 do
     cp $i /srv/tftp/pxelinux.cfg/$( basename $i .in )
 done
+
+mkdir -p /home/profiles/linux/
+install -m 755 /usr/share/oss/templates/autoyast/* /home/profiles/linux/

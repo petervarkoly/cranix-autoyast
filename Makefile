@@ -11,10 +11,11 @@ REPO            = /data1/OSC/home:varkoly:OSS-4-1:leap15.1
 PACKAGE         = oss-autoyast2
 
 install:
-	rsync -av etc/  $(DESTDIR)/etc/
-	rsync -av home/ $(DESTDIR)/home/
-	rsync -av srv/  $(DESTDIR)/srv/
-	rsync -av usr/  $(DESTDIR)/usr/
+	mkdir -p $(DESTDIR)/usr/share/oss/templates/autoyast/
+	rsync -av etc/       $(DESTDIR)/etc/
+	rsync -av templates/ $(DESTDIR)/usr/share/oss/templates/autoyast/
+	rsync -av srv/       $(DESTDIR)/srv/
+	rsync -av usr/       $(DESTDIR)/usr/
 
 dist:
 	xterm -e git log --raw  &

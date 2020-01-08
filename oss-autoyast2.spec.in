@@ -21,15 +21,16 @@ Version:        @VERSION@
 Release:        0
 Summary:	Package to create autoyast2 installation environment
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
-License:        
+License:        GPL-2.0-only
 # FIXME: use correct group, see "https://en.opensuse.org/openSUSE:Package_group_guidelines"
-Group:          
+Group:          System/YaST
 Url:            https://github.com/petervarkoly/oss-autoyast.git 
 Source:         %{name}.tar.bz2
 BuildRequires:  rsync
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
+Package to create autoyast2 installation environment on CRANIX server for openLeap clients
 
 %prep
 %setup -q

@@ -12,20 +12,20 @@ fi
 export GROUP
 export ROOM
 
-if [ -e /home/profile/linux/default ]
+if [ -e /home/profiles/linux/default ]
 then
- . /home/profile/linux/default
+ . /home/profiles/linux/default
 fi
-if [ -e /home/profile/linux/$ROOM ]
+if [ -e /home/profiles/linux/$ROOM ]
 then
- . /home/profile/linux/$ROOM
+ . /home/profiles/linux/$ROOM
 fi
-if [ -e /home/profile/linux/$GROUP ]
+if [ -e /home/profiles/linux/$GROUP ]
 then
- . /home/profile/linux/$GROUP
+ . /home/profiles/linux/$GROUP
 fi
-if [ -e /home/profile/linux/$USER ]
+if [ -e /home/profiles/linux/$USER ]
 then
- . /home/profile/linux/$USER
+ . /home/profiles/linux/$USER
 fi
 
