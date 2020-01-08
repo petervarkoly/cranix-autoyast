@@ -53,6 +53,7 @@ Package to create autoyast2 installation environment on CRANIX server for openLe
 /srv/tftp/pxelinux.cfg/autoyast.in
 /etc/xinetd.d/vsftpd.in
 /etc/vsftpd.conf.in
+%dir /srv/ftp
 %dir /srv/ftp/akt
 %dir /srv/ftp/akt/CD1
 %dir /srv/tftp
