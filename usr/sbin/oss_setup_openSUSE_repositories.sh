@@ -11,7 +11,7 @@ oss_setup_openSUSE_repositories.sh  [-v Version] [-ueh ]\n
 \t\t-h\t\tThis page\n
 "
 
-VERSION="42.3"
+VERSION="15.1"
 UPDATE="no"
 EDUCATION="no"
 TERMINALSERVER="no"

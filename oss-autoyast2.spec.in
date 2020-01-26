@@ -29,6 +29,7 @@ Source:         %{name}.tar.bz2
 BuildRequires:  rsync
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires:       vsftpd
+Requires:	yast2-nfs-server
 PreReq:         oss-base
 PreReq:         xinetd
 PreReq:         filesystem

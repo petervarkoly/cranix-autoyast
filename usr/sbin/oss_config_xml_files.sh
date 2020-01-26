@@ -43,5 +43,5 @@ do
     cp $i /srv/tftp/pxelinux.cfg/$( basename $i .in )
 done
 
-mkdir -p /home/profiles/linux/
-install -m 755 /usr/share/oss/templates/autoyast/* /home/profiles/linux/
+mkdir -p /home/softwares/linux/profiles/
+install -m 755 /usr/share/oss/templates/autoyast/* /home/softwares/linux/profiles/
