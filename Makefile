@@ -3,9 +3,6 @@
 #
 DESTDIR         = /
 TOPACKAGE       = Makefile etc  templates  LICENSE  README.md  srv  usr
-VERSION         = $(shell test -e ../VERSION && cp ../VERSION VERSION ; cat VERSION)
-RELEASE         = $(shell cat RELEASE )
-NRELEASE        = $(shell echo $(RELEASE) + 1 | bc )
 HERE            = $(shell pwd)
 REPO            = /data1/OSC/home:varkoly:OSS-4-1:leap15.1
 PACKAGE         = oss-autoyast2
@@ -29,14 +26,13 @@ dist:
 	tar jcpf $(PACKAGE).tar.bz2 -T files;
 	rm files
 	rm -rf $(PACKAGE)
-	sed    's/@VERSION@/$(VERSION)/'  $(PACKAGE).spec.in > $(PACKAGE).spec
-	sed -i 's/@RELEASE@/$(NRELEASE)/' $(PACKAGE).spec
+	xterm -e git log --raw &
 	if [ -d $(REPO)/$(PACKAGE) ] ; then \
 	   cd $(REPO)/$(PACKAGE); osc up; cd $(HERE);\
-	    mv $(PACKAGE).tar.bz2 $(PACKAGE).spec $(REPO)/$(PACKAGE); \
-	    cd $(REPO)/$(PACKAGE); \
-	    osc vc; \
-	    osc ci -m "New Build Version"; \
+	   mv $(PACKAGE).tar.bz2 $(REPO)/$(PACKAGE); \
+	   cd $(REPO)/$(PACKAGE); \
+	   osc vc; \
+	   osc ci -m "New Build Version"; \
 	fi
 	echo $(NRELEASE) > RELEASE
 	git commit -a -m "New release"
