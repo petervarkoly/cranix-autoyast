@@ -38,10 +38,9 @@ do
   sed -i "s#CURRENT_KBD#$current_kbd#g"  $name
 done
 
-for i in /srv/tftp/pxelinux.cfg/autoyast*in
-do
-    cp $i /srv/tftp/pxelinux.cfg/$( basename $i .in )
-done
-
-mkdir -p /home/softwares/linux/profiles/
-install -m 755 /usr/share/oss/templates/autoyast/* /home/softwares/linux/profiles/
+if [ ! -e /srv/tftp/pxelinux.cfg/autoyast ]; 
+then
+       	cp /srv/tftp/pxelinux.cfg/autoyast.in /srv/tftp/pxelinux.cfg/autoyast
+fi
+mkdir -p /home/software/linux/profiles/
+install -m 755 /usr/share/oss/templates/autoyast/* /home/software/linux/profiles/

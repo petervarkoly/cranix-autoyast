@@ -10,7 +10,7 @@
     </file>
     <file>
       <file_owner>root</file_owner>
-      <file_path>/home/softwares/linux/profiles/pam_session</file_path>
+      <file_path>/home/software/linux/profiles/pam_session</file_path>
       <file_permissions>755</file_permissions>
       <file_location>ftp://install/akt/xml/files/local-pam_session</file_location>
     </file>
@@ -398,7 +398,7 @@ sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
         <filename>create-some-directories</filename>
         <interpreter>shell</interpreter>
         <source>
-		<![CDATA[mkdir -p /mnt/home/softwares/linux/profiles/
+		<![CDATA[mkdir -p /mnt/home/software/linux/profiles/
 ]]>
         </source>
       </script>
@@ -422,8 +422,8 @@ grep nfs:/home /etc/fstab || echo "nfs:/home /home nfs acl,rw,async 0 0" >> /etc
 systemctl enable oss-client
 
 #Add pam_session to auth and session 
-echo "auth    required        pam_exec.so expose_authtok /home/softwares/linux/profiles/pam_session" >> /etc/pam.d/common-auth
-echo "session    required        pam_exec.so /home/softwares/linux/profiles/pam_session" >> /etc/pam.d/common-session
+echo "auth    required        pam_exec.so expose_authtok /home/software/linux/profiles/pam_session" >> /etc/pam.d/common-auth
+echo "session    required        pam_exec.so /home/software/linux/profiles/pam_session" >> /etc/pam.d/common-session
 ]]>
         </source>
       </script>
