@@ -26,7 +26,6 @@ dist:
 	tar jcpf $(PACKAGE).tar.bz2 -T files;
 	rm files
 	rm -rf $(PACKAGE)
-	xterm -e git log --raw &
 	if [ -d $(REPO)/$(PACKAGE) ] ; then \
 	   cd $(REPO)/$(PACKAGE); osc up; cd $(HERE);\
 	   mv $(PACKAGE).tar.bz2 $(REPO)/$(PACKAGE); \
@@ -34,9 +33,6 @@ dist:
 	   osc vc; \
 	   osc ci -m "New Build Version"; \
 	fi
-	echo $(NRELEASE) > RELEASE
-	git commit -a -m "New release"
-	git push
 
 configure:
 	/usr/sbin/oss_config_xml_files.sh
