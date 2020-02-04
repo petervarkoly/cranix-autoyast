@@ -252,13 +252,11 @@
         <service>getty@tty1</service>
         <service>irqbalance</service>
         <service>lvm2-lvmetad</service>
-        <service>oss-client-init</service>
+        <service>oss-client</service>
         <service>postfix</service>
         <service>purge-kernels</service>
         <service>sshd</service>
         <service>sssd</service>
-        <service>systemd-readahead-collect</service>
-        <service>systemd-readahead-replay</service>
         <service>wicked</service>
         <service>wickedd-nanny</service>
         <service>wickedd</service>
@@ -305,7 +303,6 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfi
       <package>yast2-nfs-server</package>
       <package>zypper</package>
       <package>autoyast2</package>
-      <package>rsync</package>
       <package>vim</package>
     </packages>
     <remove-packages  config:type="list">

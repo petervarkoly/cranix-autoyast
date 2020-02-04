@@ -24,7 +24,7 @@ uri     ldap://admin
 # Copyright (c) 2011 Peter Varkoly
 # All rights reserved.
 #
-# /etc/init.d/oss-client-init
+# /etc/init.d/oss-client
 #
 ### BEGIN INIT INFO
 # Provides:       oss-client
@@ -80,7 +80,7 @@ rc_exit
 ]]>
       </file_contents>
       <file_owner>root</file_owner>
-      <file_path>/etc/init.d/oss-client-init</file_path>
+      <file_path>/etc/init.d/oss-client</file_path>
       <file_permissions>744</file_permissions>
     </file>
     <file>
@@ -640,13 +640,11 @@ exit 0
         <service>lvm2-lvmetad</service>
         <service>ModemManager</service>
         <service>nfs</service>
-        <service>oss-client-init</service>
+        <service>oss-client</service>
         <service>postfix</service>
         <service>purge-kernels</service>
         <service>sshd</service>
         <service>sssd</service>
-        <service>systemd-readahead-collect</service>
-        <service>systemd-readahead-replay</service>
         <service>wicked</service>
         <service>wickedd-auto4</service>
         <service>wickedd-dhcp4</service>
@@ -722,7 +720,6 @@ echo "session    required        pam_exec.so /home/software/linux/profiles/pam_s
     </patterns>
     <packages config:type="list">
       <package>yast2-auth-client</package>
-      <service>rsync</service>
       <package>zypper</package>
       <package>autoyast2</package>
       <package>oss-client-control-daemon-tc</package>
