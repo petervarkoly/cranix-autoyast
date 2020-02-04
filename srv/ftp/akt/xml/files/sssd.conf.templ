@@ -11,7 +11,7 @@ filter_users = root
 [pam]
 
 [domain/default]
-debug_level = 9
+debug_level = 2
 ldap_tls_reqcert = never
 auth_provider = ldap
 id_provider = ldap
@@ -21,7 +21,8 @@ ldap_id_use_start_tls = False
 ldap_user_shell = /bin/bash
 ldap_search_base = BASEDN
 ldap_uri = ldap://admin
-enumerate = true
+enumerate = false
+cache_credentials = true
 ldap_default_bind_dn = READERDN
 ldap_default_authtok = ossreader
 ldap_referrals = false
