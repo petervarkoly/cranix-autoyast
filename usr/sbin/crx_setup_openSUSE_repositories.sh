@@ -41,20 +41,20 @@ if [ -e /srv/ftp/akt/RC1/ ]; then
    rm -rf /srv/ftp/akt/RC1/
 fi
 
-. /etc/sysconfig/schoolserver
+. /etc/sysconfig/cranix
 RSYNC_PASSWORD=${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
 
 rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/distribution/$VERSION/repo/oss/       /srv/ftp/akt/CD1/
 rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/distribution/$VERSION/repo/non-oss/   /srv/ftp/akt/non-oss/
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync.opensuse.org::buildservice-repos/home:/openschoolserver/openSUSE_$VERSION/ /srv/ftp/akt/OSS/
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync.opensuse.org::buildservice-repos/home:/opencranix/openSUSE_$VERSION/ /srv/ftp/akt/OSS/
 
 if [ $UPDATE = "yes" ]; then
     rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/oss/             /srv/ftp/akt/updates/
     rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/non-oss/         /srv/ftp/akt/updates-non-oss/
     echo "#!/bin/bash
-. /etc/sysconfig/schoolserver
+. /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
@@ -67,7 +67,7 @@ fi
 if [ "$EDUCATION" = "yes" ]; then
     rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/Education/$VERSION/ /srv/ftp/akt/Education/
     echo "#!/bin/bash
-. /etc/sysconfig/schoolserver
+. /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
@@ -79,7 +79,7 @@ fi
 if [ "$PACKMAN" = "yes" ]; then
     rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::PACKMAN/$VERSION/ /srv/ftp/akt/packman/
     echo "#!/bin/bash
-. /etc/sysconfig/schoolserver
+. /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD

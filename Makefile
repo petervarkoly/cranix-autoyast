@@ -4,14 +4,14 @@
 DESTDIR         = /
 TOPACKAGE       = Makefile etc  templates  LICENSE  README.md  srv  usr
 HERE            = $(shell pwd)
-REPO            = /data1/OSC/home:varkoly:OSS-4-1:leap15.1
-PACKAGE         = oss-autoyast2
+REPO            = /data1/OSC/home:varkoly:CRANIX-4-2
+PACKAGE         = cranix-autoyast2
 
 install:
-	mkdir -p $(DESTDIR)/usr/share/oss/templates/autoyast/
+	mkdir -p $(DESTDIR)/usr/share/cranix/templates/autoyast/
 	mkdir -p $(DESTDIR)/srv/ftp/akt/CD1
 	rsync -av etc/       $(DESTDIR)/etc/
-	rsync -av templates/ $(DESTDIR)/usr/share/oss/templates/autoyast/
+	rsync -av templates/ $(DESTDIR)/usr/share/cranix/templates/autoyast/
 	rsync -av srv/       $(DESTDIR)/srv/
 	rsync -av usr/       $(DESTDIR)/usr/
 
@@ -35,4 +35,4 @@ dist:
 	fi
 
 configure:
-	/usr/sbin/oss_config_xml_files.sh
+	/usr/sbin/crx_config_xml_files.sh

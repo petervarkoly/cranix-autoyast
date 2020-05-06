@@ -1,7 +1,7 @@
 #!/bin/bash
 . /etc/sysconfig/clock
 . /etc/sysconfig/keyboard
-. /etc/sysconfig/schoolserver
+. /etc/sysconfig/cranix
 if [ ! -e /root/.ssh/id_rsa.pub ]; then
 	/usr/bin/ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
 	cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys

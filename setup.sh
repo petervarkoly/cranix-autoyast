@@ -9,7 +9,7 @@ fi
 VERSION=15.1
 ARG="-V 15.1 -e"
 zypper -n install wget
-wget -O opensuse-${VERSION}.tgz http://repo.openschoolserver.net/downloads/autoyast/${VERSION}/opensuse-${VERSION}.tgz
+wget -O opensuse-${VERSION}.tgz http://repo.cephalix.net/downloads/autoyast/${VERSION}/opensuse-${VERSION}.tgz
 if [ -e /srv/ftp/akt/CD1/content ]; then
     IS132=$( grep "opensuse:${VERSION}" /srv/ftp/akt/CD1/content )
     if [ -z "$IS132" ]; then
