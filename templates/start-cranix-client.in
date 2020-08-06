@@ -1,9 +1,7 @@
 #!/bin/bash
-# Copyright (c) 2012 Peter Varkoly <peter@varkoly.de> Nürnberg, Germany.  All rights reserved.
-# file: /home/software/oss/start-oss-client
-# Start script for oss-clients
-# Author Peter Varkoly <pv@extis.de>
-# Copyright Peter Varkoly <pv@extis.de>
+# Copyright (c) 2020 Peter Varkoly <pvarkoly@cephalix.eu> Nürnberg, Germany.  All rights reserved.
+# file: /home/software/cranix/start-cranix-client
+# Start script for cranix-clients
 #
 ROOM=`echo $HOSTNAME | sed s/-pc[0-6][0-9]//`
 
@@ -46,10 +44,10 @@ fi
 #sed -i 's/^DEFAULT_WM=/DEFAULT_WM="gnome"/' /etc/sysconfig/windowmanager
 
 #set the permissions
-if [ -e /etc/permissions.d/oss-client ]
+if [ -e /etc/permissions.d/cranix-client ]
 then
   sed -i 's/^CHECK_PERMISSIONS=.*/CHECK_PERMISSIONS="yes"/' /etc/sysconfig/security
-  sed -i 's/^PERMISSION_SECURITY=.*/PERMISSION_SECURITY="easy local oss-client"/' /etc/sysconfig/security
+  sed -i 's/^PERMISSION_SECURITY=.*/PERMISSION_SECURITY="easy local cranix-client"/' /etc/sysconfig/security
   /sbin/SuSEconfig -module permissions
 fi
 

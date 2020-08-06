@@ -38,8 +38,8 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS="SERVER_NET"#' /etc/sysconfig/SuSE
 #Workaround for not working yast-nfs-client
 grep admin:/home /etc/fstab || echo "admin:/home /home nfs acl,rw,async 0 0" >> /etc/fstab
 
-#Activate oss-client
-systemctl enable oss-client
+#Activate cranix-client
+systemctl enable cranix-client
 
 #Activate sssd
 /usr/sbin/pam-config -a --sss

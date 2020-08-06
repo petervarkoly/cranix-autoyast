@@ -1,0 +1,12 @@
+[Unit]
+Description=CRANIX-Client startup script
+After=remote-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/software/cranix/linux/start-crx-client
+ExecStop=/usr/sbin/stop-crx-client
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

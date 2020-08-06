@@ -1,9 +1,9 @@
 #!/bin/bash
 
 USAGE="\n
-oss_setup_openSUSE_repositories.sh  [-v Version] [-ueh ]\n
+crx_setup_openSUSE_repositories.sh  [-v Version] [-ueh ]\n
 \n
-\t\t-V Version\tThe openSUSE version: 42.3.\n
+\t\t-V Version\tThe openSUSE version: 15.1.\n
 \t\t-u\t\tSynchronize update repository.\n
 \t\t-e\t\tSynchronize education repository.\n
 \t\t-t\t\tSynchronize terminalserver repository.\n
@@ -46,49 +46,49 @@ RSYNC_PASSWORD=${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
 
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/distribution/$VERSION/repo/oss/       /srv/ftp/akt/CD1/
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/distribution/$VERSION/repo/non-oss/   /srv/ftp/akt/non-oss/
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::openSUSE/distribution/$VERSION/repo/oss/       /srv/ftp/akt/CD1/
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::openSUSE/distribution/$VERSION/repo/non-oss/   /srv/ftp/akt/non-oss/
 rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync.opensuse.org::buildservice-repos/home:/opencranix/openSUSE_$VERSION/ /srv/ftp/akt/OSS/
 
 if [ $UPDATE = "yes" ]; then
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/oss/             /srv/ftp/akt/updates/
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/non-oss/         /srv/ftp/akt/updates-non-oss/
+    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::openSUSE/updates/$VERSION/oss/             /srv/ftp/akt/updates/
+    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::openSUSE/updates/$VERSION/non-oss/         /srv/ftp/akt/updates-non-oss/
     echo "#!/bin/bash
 . /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/oss/     /srv/ftp/akt/updates/
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@pan.extis.de::openSUSE/updates/$VERSION/non-oss/ /srv/ftp/akt/updates-non-oss/
-" > /etc/cron.weekly/oss.openSUSE-updates
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@repo.cephalix.eu::openSUSE/updates/$VERSION/oss/     /srv/ftp/akt/updates/
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@repo.cephalix.eu::openSUSE/updates/$VERSION/non-oss/ /srv/ftp/akt/updates-non-oss/
+" > /etc/cron.weekly/crx.openSUSE-updates
 fi
 
 #Download Education Packages
 if [ "$EDUCATION" = "yes" ]; then
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::openSUSE/Education/$VERSION/ /srv/ftp/akt/Education/
+    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::openSUSE/Education/$VERSION/ /srv/ftp/akt/Education/
     echo "#!/bin/bash
 . /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@pan.extis.de::openSUSE/Education/$VERSION/  /srv/ftp/akt/Education/
-" > /etc/cron.weekly/oss.Education-update
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@repo.cephalix.eu::openSUSE/Education/$VERSION/  /srv/ftp/akt/Education/
+" > /etc/cron.weekly/crx.Education-update
 fi
 
 #Dowload PACMAN
 if [ "$PACKMAN" = "yes" ]; then
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@pan.extis.de::PACKMAN/$VERSION/ /srv/ftp/akt/packman/
+    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::PACKMAN/$VERSION/ /srv/ftp/akt/packman/
     echo "#!/bin/bash
 . /etc/sysconfig/cranix
 RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
 RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
 export RSYNC_PASSWORD
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@pan.extis.de::PACKMAN/$VERSION/  /srv/ftp/akt/packman/
-" > /etc/cron.weekly/oss.PACKMAN-update
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@repo.cephalix.eu::PACKMAN/$VERSION/  /srv/ftp/akt/packman/
+" > /etc/cron.weekly/crx.PACKMAN-update
 fi
 
 #Make updte cron jobs executable:
-chmod 755 /etc/cron.weekly/oss.*
+chmod 755 /etc/cron.weekly/crx.*
 
 #Create tftp-boot environment
 cd /srv/ftp
