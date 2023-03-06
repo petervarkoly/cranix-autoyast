@@ -215,6 +215,7 @@
         <service>smb</service>
         <service>sshd</service>
         <service>sssd</service>
+        <service>winbind</service>
         <service>wicked</service>
         <service>wickedd-nanny</service>
         <service>wickedd</service>
@@ -243,6 +244,9 @@ echo 'KEYROOT' >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'syntax on' >> /root/.exrc
 echo '/backup @SERVER@(rw,no_root_squash,acl,no_subtree_check)' >> /etc/exports
+sed -i 's/^passwd:.*/passwd: compat sss winbind/' /etc/nsswitch.conf
+sed -i 's/^group:.*/group:  compat sss winbind/' /etc/nsswitch.conf
+
 ]]></source>
       </script>
     </chroot-scripts>
@@ -251,7 +255,6 @@ echo '/backup @SERVER@(rw,no_root_squash,acl,no_subtree_check)' >> /etc/exports
     <install_recommended config:type="boolean">true</install_recommended>
     <!-- instsource>http://download.opensuse.org/distribution/leap/15.1/repo/oss/</instsource -->
     <patterns config:type="list">
-      <pattern>file_server</pattern>
       <pattern>minimal_base</pattern>
       <pattern>basesystem</pattern>
       <pattern>base</pattern>
@@ -260,6 +263,11 @@ echo '/backup @SERVER@(rw,no_root_squash,acl,no_subtree_check)' >> /etc/exports
       <package>autoyast2</package>
       <package>nfs-kernel-server</package>
       <package>openssh</package>
+      <package>samba</package>
+      <package>samba-winbind</package>
+      <package>sssd</package>
+      <package>sssd-common</package>
+      <package>sssd-ldap</package>
       <package>vim</package>
       <package>yast2-nfs-server</package>
       <package>zypper</package>
