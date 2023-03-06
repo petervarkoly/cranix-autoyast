@@ -121,17 +121,6 @@
       </routes>
     </routing>
   </networking>
-  <nfs_server>
-    <nfs_exports config:type="list">
-      <nfs_export>
-        <allowed config:type="list">
-          <allowed_clients>@SERVER@(rw,no_root_squash,sync,no_subtree_check)</allowed_clients>
-        </allowed>
-        <mountpoint>/backup</mountpoint>
-      </nfs_export>
-    </nfs_exports>
-    <start_nfsserver config:type="boolean">true</start_nfsserver>
-  </nfs_server>
   <ntp-client>
     <ntp_policy>auto</ntp_policy>
     <ntp_servers config:type="list">
