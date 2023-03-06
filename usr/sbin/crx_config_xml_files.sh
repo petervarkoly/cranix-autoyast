@@ -27,6 +27,8 @@ do
   sed -i "s#READERDN#$READERDN#g"  $name
   sed -i "s#BASEDN#$BASEDN#g"  $name
   sed -i "s#DOMAIN#$CRANIX_DOMAIN#g"  $name
+  sed -i "s#REALM#${CRANIX_DOMAIN^^}#g"  $name
+  sed -i "s#CRANIX_WORKGROUP#$CRANIX_WORKGROUP#g"  $name
   sed -i "s#SERVER_NET#$CRANIX_SERVER_NET#g"  $name
   sed -i "s#BACKUP_SERVER#$CRANIX_BACKUP_SERVER#g"  $name
   sed -i "s#NETMASK#$CRANIX_NETMASK#g"  $name
@@ -44,3 +46,23 @@ then
 fi
 mkdir -p /home/software/linux/profiles/
 install -m 755 /usr/share/cranix/templates/autoyast/* /home/software/linux/profiles/
+
+if [ -z "$( grep 'Backup Server' /srv/tftp/efi/grub.cfg )" ]; then
+echo "
+menuentry 'Backup Server' {
+  set timeout=120
+  echo 'Loading kernel ...'
+  linuxefi linux install=ftp://install/akt/CD1 autoyast=ftp://install/akt/xml/backup.xml insecure=1
+  echo 'Loading initial ramdsik ...'
+  initrdefi initrd
+}
+" >> /srv/tftp/efi/grub.cfg
+fi
+
+if [ -z "$( grep 'Backup Server' /srv/tftp/pxelinux.cfg/default )" ]; then
+echo "
+LABEL Backup Server installieren
+        KERNEL linux
+        APPEND initrd=initrd autoyast=ftp://install/akt/xml/backup.xml install=ftp://install/akt/CD1/ insecure=1
+" >> /srv/tftp/pxelinux.cfg/default
+fi

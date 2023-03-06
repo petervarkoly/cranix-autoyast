@@ -33,7 +33,6 @@ echo 'KEYROOT' > /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'syntax on' >> /root/.exrc
 chmod 700 /bin/su
-sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS="SERVER_NET"#' /etc/sysconfig/SuSEfirewall2
 
 #Workaround for not working yast-nfs-client
 grep admin:/home /etc/fstab || echo "admin:/home /home nfs acl,rw,async 0 0" >> /etc/fstab

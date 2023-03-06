@@ -2,24 +2,8 @@
 <!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
   <firewall>
-    <FW_ALLOW_FW_BROADCAST_DMZ></FW_ALLOW_FW_BROADCAST_DMZ>
-    <FW_ALLOW_FW_BROADCAST_EXT></FW_ALLOW_FW_BROADCAST_EXT>
-    <FW_ALLOW_FW_BROADCAST_INT></FW_ALLOW_FW_BROADCAST_INT>
-    <FW_DEV_DMZ></FW_DEV_DMZ>
-    <FW_DEV_EXT>##NET_DEV##</FW_DEV_EXT>
-    <FW_DEV_INT></FW_DEV_INT>
-    <FW_IGNORE_FW_BROADCAST_DMZ>no</FW_IGNORE_FW_BROADCAST_DMZ>
-    <FW_IGNORE_FW_BROADCAST_EXT>no</FW_IGNORE_FW_BROADCAST_EXT>
-    <FW_IGNORE_FW_BROADCAST_INT>no</FW_IGNORE_FW_BROADCAST_INT>
-    <FW_LOG_ACCEPT_ALL>no</FW_LOG_ACCEPT_ALL>
-    <FW_LOG_ACCEPT_CRIT>yes</FW_LOG_ACCEPT_CRIT>
-    <FW_LOG_DROP_ALL>no</FW_LOG_DROP_ALL>
-    <FW_LOG_DROP_CRIT>yes</FW_LOG_DROP_CRIT>
-    <FW_SERVICES_EXT_IP></FW_SERVICES_EXT_IP>
-    <FW_SERVICES_EXT_RPC>nlockmgr portmap status</FW_SERVICES_EXT_RPC>
-    <FW_SERVICES_EXT_UDP>bootpc</FW_SERVICES_EXT_UDP>
-    <enable_firewall config:type="boolean">true</enable_firewall>
-    <start_firewall config:type="boolean">true</start_firewall>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <start_firewall config:type="boolean">false</start_firewall>
   </firewall>
   <networking>
     <dhcp_options>

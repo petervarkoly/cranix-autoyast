@@ -17,29 +17,19 @@
     <file>
       <file_owner>root</file_owner>
       <file_path>/etc/sssd/sssd.conf</file_path>
-      <file_permissions>644</file_permissions>
+      <file_permissions>600</file_permissions>
       <file_location>ftp://install/akt/xml/files/sssd.conf</file_location>
+    </file>
+    <file>
+      <file_owner>root</file_owner>
+      <file_path>/etc/samba/smb.conf</file_path>
+      <file_permissions>644</file_permissions>
+      <file_location>ftp://install/akt/xml/files/smb.conf</file_location>
     </file>
   </files>
   <firewall>
-    <FW_ALLOW_FW_BROADCAST_DMZ/>
-    <FW_ALLOW_FW_BROADCAST_EXT/>
-    <FW_ALLOW_FW_BROADCAST_INT/>
-    <FW_DEV_DMZ/>
-    <FW_DEV_EXT>##NET_DEV##</FW_DEV_EXT>
-    <FW_DEV_INT/>
-    <FW_IGNORE_FW_BROADCAST_DMZ>no</FW_IGNORE_FW_BROADCAST_DMZ>
-    <FW_IGNORE_FW_BROADCAST_EXT>no</FW_IGNORE_FW_BROADCAST_EXT>
-    <FW_IGNORE_FW_BROADCAST_INT>no</FW_IGNORE_FW_BROADCAST_INT>
-    <FW_LOG_ACCEPT_ALL>no</FW_LOG_ACCEPT_ALL>
-    <FW_LOG_ACCEPT_CRIT>yes</FW_LOG_ACCEPT_CRIT>
-    <FW_LOG_DROP_ALL>no</FW_LOG_DROP_ALL>
-    <FW_LOG_DROP_CRIT>yes</FW_LOG_DROP_CRIT>
-    <FW_SERVICES_EXT_IP/>
-    <FW_SERVICES_EXT_RPC>nlockmgr portmap status</FW_SERVICES_EXT_RPC>
-    <FW_SERVICES_EXT_UDP>bootpc</FW_SERVICES_EXT_UDP>
-    <enable_firewall config:type="boolean">true</enable_firewall>
-    <start_firewall config:type="boolean">true</start_firewall>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <start_firewall config:type="boolean">false</start_firewall>
   </firewall>
   <deploy_image>
     <image_installation config:type="boolean">true</image_installation>
@@ -284,7 +274,6 @@ sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
 echo 'KEYROOT' >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'syntax on' >> /root/.exrc
-sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfirewall2
 ]]></source>
       </script>
     </post-scripts>
@@ -306,7 +295,6 @@ sed -i 's#^FW_TRUSTED_NETS=.*#FW_TRUSTED_NETS=SERVER_NET#' /etc/sysconfig/SuSEfi
       <package>vim</package>
     </packages>
     <remove-packages  config:type="list">
-      <package>firewalld</package>
       <package>gnome-packagekit</package>
       <package>gnome-packagekit-lang</package>
       <package>pk-update-icon</package>

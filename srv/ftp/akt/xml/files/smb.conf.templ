@@ -1,0 +1,26 @@
+[global]
+workgroup = CRANIX_WORKGROUP
+realm = REALM
+netbios name = backup
+security = ADS
+bind interfaces only = yes
+interfaces = BACKUP_SERVER
+#disable printing
+load printers = no
+printcap name = /dev/null
+disable spoolss = yes
+winbind nss info = rfc2307
+idmap config * : backend = tdb
+idmap config * : range = 3000-7999
+idmap config CRANIX_WORKGROUP:backend = ad
+idmap config CRANIX_WORKGROUP:schema_mode = rfc2307
+idmap config CRANIX_WORKGROUP:range = 10000-9999999
+
+vfs objects = acl_xattr
+map acl inherit = yes
+store dos attributes = yes
+
+[backup]
+comment = Backup
+path = /backup
+

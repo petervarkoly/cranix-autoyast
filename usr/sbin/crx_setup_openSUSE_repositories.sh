@@ -43,9 +43,6 @@ if [ -e /srv/ftp/akt/RC1/ ]; then
 fi
 
 . /etc/sysconfig/cranix
-RSYNC_PASSWORD=${SCHOOL_REG_CODE:10:9}
-RSYNC_USER=${SCHOOL_REG_CODE:0:9}
-export RSYNC_PASSWORD
 RSYNC_PARAMS="-avz --stats --delete --delete-after --exclude=src --exclude=ppc --exclude=aarch64 --exclude=aarch64_ilp32 --exclude=armv7hl"
 
 rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-full/opensuse/distribution/leap/${VERSION}/repo/oss/     /srv/ftp/akt/CD1/
@@ -70,13 +67,9 @@ fi
 
 #Dowload PACMAN
 if [ "$PACKMAN" = "yes" ]; then
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc $RSYNC_USER@repo.cephalix.eu::PACKMAN/$VERSION/ /srv/ftp/akt/packman/
+    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
     echo "#!/bin/bash
-. /etc/sysconfig/cranix
-RSYNC_PASSWORD=\${SCHOOL_REG_CODE:10:9}
-RSYNC_USER=\${SCHOOL_REG_CODE:0:9}
-export RSYNC_PASSWORD
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc \$RSYNC_USER@repo.cephalix.eu::PACKMAN/$VERSION/  /srv/ftp/akt/packman/
+rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
 " > /etc/cron.weekly/crx.PACKMAN-update
 fi
 
