@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
   <files config:type="list">
     <file>
@@ -31,15 +30,10 @@
     <enable_firewall config:type="boolean">false</enable_firewall>
     <start_firewall config:type="boolean">false</start_firewall>
   </firewall>
-  <deploy_image>
-    <image_installation config:type="boolean">true</image_installation>
-  </deploy_image>
   <general>
-    <ask-list config:type="list"/>
     <mode>
       <confirm config:type="boolean">false</confirm>
     </mode>
-    <proposals config:type="list"/>
     <signature-handling>
       <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
       <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
@@ -48,10 +42,6 @@
       <accept_verification_failed config:type="boolean">true</accept_verification_failed>
       <import_gpg_key config:type="boolean">true</import_gpg_key>
     </signature-handling>
-    <storage>
-      <partition_alignment config:type="symbol">align_optimal</partition_alignment>
-      <start_multipath config:type="boolean">false</start_multipath>
-    </storage>
   </general>
   <report>
     <messages>
@@ -71,29 +61,16 @@
     </warnings>
   </report>
   <keyboard>
-    <keyboard_values>
-      <capslock config:type="boolean">false</capslock>
-      <delay/>
-      <discaps config:type="boolean">false</discaps>
-      <numlock/>
-      <rate/>
-      <scrlock config:type="boolean">false</scrlock>
-      <tty>tty1 tty2 tty3 tty4 tty5 tty6 tty8 tty9 tty10 tty11 tty12 tty13 tty14 tty15 tty16 tty17 tty18 tty19 tty20</tty>
-    </keyboard_values>
     <keymap>CURRENT_KBD</keymap>
   </keyboard>
   <language>
     <language>LANGUAGE</language>
-    <languages/>
+    <languages>en_US</languages>
   </language>
   <timezone>
     <hwclock>UTC</hwclock>
     <timezone>TIMEZONE</timezone>
   </timezone>
-  <sound>
-    <autoinstall config:type="boolean">true</autoinstall>
-    <configure_detected config:type="boolean">true</configure_detected>
-  </sound>
   <login_settings/>
   <networking>
     <dns>
@@ -130,7 +107,6 @@
       </interface>
     </interfaces>
     <ipv6 config:type="boolean">true</ipv6>
-    <keep_install_network config:type="boolean">true</keep_install_network>
     <managed config:type="boolean">true</managed>
     <routing>
       <ipv4_forward config:type="boolean">false</ipv4_forward>
@@ -167,15 +143,6 @@
     </ntp_servers>
     <ntp_sync>15</ntp_sync>
   </ntp-client>
-  <proxy>
-    <enabled config:type="boolean">true</enabled>
-    <ftp_proxy>http://proxy:8080/</ftp_proxy>
-    <http_proxy>http://proxy:8080/</http_proxy>
-    <https_proxy>http://proxy:8080/</https_proxy>
-    <no_proxy>admin, install, schulserver, cranix, .DOMAIN</no_proxy>
-    <proxy_password/>
-    <proxy_user/>
-  </proxy>
   <partitioning config:type="list">
     <drive>
       <initialize config:type="boolean">true</initialize>
@@ -237,14 +204,15 @@
       </disable>
       <enable config:type="list">
         <service>cron</service>
-        <service>cups</service>
         <service>dm-event</service>
         <service>getty@tty1</service>
         <service>irqbalance</service>
         <service>lvm2-lvmetad</service>
         <service>cranix-client</service>
+        <service>nfsserver</service>
         <service>postfix</service>
         <service>purge-kernels</service>
+        <service>smb</service>
         <service>sshd</service>
         <service>sssd</service>
         <service>wicked</service>
@@ -265,18 +233,19 @@ sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
 ]]></source>
       </script>
     </pre-scripts>
-    <chroot-scripts config:type="list"/>
-    <post-scripts config:type="list">
+    <chroot-scripts config:type="list">
       <script>
-        <filename>root-desktop</filename>
+        <chrooted config:type="boolean">true</chrooted>
+        <filename>root-ssh-access</filename>
         <interpreter>shell</interpreter>
         <source><![CDATA[test -e /root/.ssh/ || mkdir /root/.ssh/
 echo 'KEYROOT' >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'syntax on' >> /root/.exrc
+echo '/backup @SERVER@(rw,no_root_squash,acl,no_subtree_check)' >> /etc/exports
 ]]></source>
       </script>
-    </post-scripts>
+    </chroot-scripts>
   </scripts>
   <software>
     <install_recommended config:type="boolean">true</install_recommended>
@@ -288,11 +257,12 @@ echo 'syntax on' >> /root/.exrc
       <pattern>base</pattern>
     </patterns>
     <packages config:type="list">
+      <package>autoyast2</package>
       <package>nfs-kernel-server</package>
+      <package>openssh</package>
+      <package>vim</package>
       <package>yast2-nfs-server</package>
       <package>zypper</package>
-      <package>autoyast2</package>
-      <package>vim</package>
     </packages>
     <remove-packages  config:type="list">
       <package>gnome-packagekit</package>
