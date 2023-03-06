@@ -4,7 +4,7 @@
 DESTDIR         = /
 TOPACKAGE       = Makefile etc  templates  LICENSE  README.md  srv  usr
 HERE            = $(shell pwd)
-REPO            = /data1/OSC/home:varkoly:CRANIX-4-2
+REPO            = /data1/OSC/home:pvarkoly:CRANIX
 PACKAGE         = cranix-autoyast2
 
 install:
