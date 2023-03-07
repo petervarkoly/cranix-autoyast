@@ -220,6 +220,22 @@
         <filename>10_check-hw.sh</filename>
         <source><![CDATA[DEV=$( /sbin/ip link | grep 'state UP' | gawk -F': ' '{ print $2 }' )
 sed s/##NET_DEV##/$DEV/ /tmp/profile/autoinst.xml > /tmp/profile/modified.xml
+if [ $( hostname ) != "backup" ]; then
+        echo "Bitte diesen Rechner am CRANIX-Server als 'backup' registrieren, bevor Sie den als Backups-Server installieren."
+        echo "Please register this computer as 'backup' on CRANIX befor install it as backup server."
+        touch /tmp/not-registered
+        exit -1
+fi
+]]></source>
+      </script>
+      <script>
+        <feedback config:type="boolean">true</feedback>
+        <debug config:type="boolean">false</debug>
+        <filename>20_check-hw.sh</filename>
+        <source><![CDATA[
+        if [ -e /tmp/not-registered ]; then
+                killall -9 yast2
+        fi
 ]]></source>
       </script>
     </pre-scripts>
