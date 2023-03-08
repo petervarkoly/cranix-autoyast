@@ -265,7 +265,9 @@ sed -i 's/^group:.*/group:  compat sss winbind/' /etc/nsswitch.conf
       <pattern>base</pattern>
     </patterns>
     <packages config:type="list">
+      <package>acl</package>
       <package>autoyast2</package>
+      <package>man</package>
       <package>nfs-kernel-server</package>
       <package>openssh</package>
       <package>samba</package>
@@ -289,33 +291,13 @@ sed -i 's/^group:.*/group:  compat sss winbind/' /etc/nsswitch.conf
   </software>
   <sysconfig config:type="list">
     <sysconfig_entry>
-      <sysconfig_key>RUN_PARALLEL</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/boot</sysconfig_path>
-      <sysconfig_value>no</sysconfig_value>
+      <sysconfig_key>NFS3_SERVER_SUPPORT</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/nfs</sysconfig_path>
+      <sysconfig_value>yes</sysconfig_value>
     </sysconfig_entry>
     <sysconfig_entry>
-      <sysconfig_key>DEFAULT_WM</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
-      <sysconfig_value>xfce</sysconfig_value>
-    </sysconfig_entry>
-    <sysconfig_entry>
-      <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
-      <sysconfig_value>xdm</sysconfig_value>
-    </sysconfig_entry>
-    <sysconfig_entry>
-      <sysconfig_key>DISPLAYMANAGER_SHUTDOWN</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
-      <sysconfig_value>all</sysconfig_value>
-    </sysconfig_entry>
-    <sysconfig_entry>
-      <sysconfig_key>KDM_GREETSTRING</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
-      <sysconfig_value>Open School Server Client</sysconfig_value>
-    </sysconfig_entry>
-    <sysconfig_entry>
-      <sysconfig_key>KDM_USERS</sysconfig_key>
-      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_key>NFS4_SUPPORT</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/nfs</sysconfig_path>
       <sysconfig_value>no</sysconfig_value>
     </sysconfig_entry>
   </sysconfig>
