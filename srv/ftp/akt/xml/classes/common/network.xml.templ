@@ -1,56 +1,48 @@
 <?xml version="1.0"?>
-<!DOCTYPE profile SYSTEM "/usr/share/autoinstall/dtd/profile.dtd">
+<!DOCTYPE profile>
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
   <firewall>
-    <enable_firewall config:type="boolean">false</enable_firewall>
-    <start_firewall config:type="boolean">false</start_firewall>
+    <enable_firewall config:type="boolean">true</enable_firewall>
+    <log_denied_packets>all</log_denied_packets>
+    <default_zone>trusted</default_zone>
+    <zones config:type="list">
+      <zone>
+        <name>trusted</name>
+        <interfaces config:type="list">
+          <interface>##NET_DEV##</interface>
+        </interfaces>
+      </zone>
+    </zones>
   </firewall>
   <networking>
-    <dhcp_options>
-      <dhclient_client_id/>
-      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
-    </dhcp_options>
     <dns>
       <dhcp_hostname config:type="boolean">true</dhcp_hostname>
-      <domain>site</domain>
-      <hostname>linux-clk4</hostname>
       <resolv_conf_policy>auto</resolv_conf_policy>
       <write_hostname config:type="boolean">false</write_hostname>
     </dns>
     <interfaces config:type="list">
       <interface>
-	<device>##NET_DEV##</device>
+        <device>##NET_DEV##</device>
         <bootproto>dhcp4</bootproto>
         <startmode>auto</startmode>
       </interface>
-      <interface>
-        <broadcast>127.255.255.255</broadcast>
-        <device>lo</device>
-        <firewall>no</firewall>
-        <ipaddr>127.0.0.1</ipaddr>
-        <netmask>255.0.0.0</netmask>
-        <network>127.0.0.0</network>
-        <prefixlen>8</prefixlen>
-        <startmode>auto</startmode>
-        <usercontrol>no</usercontrol>
-      </interface>
     </interfaces>
     <ipv6 config:type="boolean">false</ipv6>
-    <keep_install_network config:type="boolean">false</keep_install_network>
-    <managed config:type="boolean">true</managed>
+    <managed config:type="boolean">false</managed>
+    <keep_install_network config:type="boolean">true</keep_install_network>
     <routing>
       <ip_forward config:type="boolean">false</ip_forward>
     </routing>
   </networking>
   <nfs>
-    <enable_nfs4 config:type="boolean">false</enable_nfs4>
+    <enable_nfs4 config:type="boolean">true</enable_nfs4>
     <enable_nfs_gss config:type="boolean">false</enable_nfs_gss>
     <nfs_entries config:type="list">
       <nfs_entry>
         <mount_point>/home</mount_point>
         <nfs_options>defaults,acl,async,soft,bg</nfs_options>
         <server_path>admin:/home</server_path>
-        <vfstype>nfs</vfstype>
+        <vfstype>nfs4</vfstype>
       </nfs_entry>
     </nfs_entries>
   </nfs>

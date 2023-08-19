@@ -6,7 +6,6 @@
   </deploy_image>
   <general>
     <ask-list config:type="list">
-      <!-- BEGIN Dialog 0 - Admin Password -->
       <ask>
          <title>Domain Administrator Password</title>
          <dialog config:type="integer">0</dialog>
@@ -47,6 +46,7 @@ exit 0
       </ask>
     </ask-list>
     <mode>
+      <second_stage config:type="boolean">false</second_stage>
       <confirm config:type="boolean">false</confirm>
     </mode>
     <proposals config:type="list"/>
@@ -58,10 +58,6 @@ exit 0
       <accept_verification_failed config:type="boolean">true</accept_verification_failed>
       <import_gpg_key config:type="boolean">true</import_gpg_key>
     </signature-handling>
-    <storage>
-      <partition_alignment config:type="symbol">align_optimal</partition_alignment>
-      <start_multipath config:type="boolean">false</start_multipath>
-    </storage>
   </general>
   <report>
     <messages>
@@ -90,19 +86,15 @@ exit 0
       <scrlock config:type="boolean">false</scrlock>
       <tty>tty1 tty2 tty3 tty4 tty5 tty6 tty8 tty9 tty10 tty11 tty12 tty13 tty14 tty15 tty16 tty17 tty18 tty19 tty20</tty>
     </keyboard_values>
-    <keymap>CURRENT_KBD</keymap>
+    <keymap>german</keymap>
   </keyboard>
   <language>
-    <language>LANGUAGE</language>
+    <language>de_DE</language>
     <languages/>
   </language>
   <timezone>
     <hwclock>UTC</hwclock>
-    <timezone>TIMEZONE</timezone>
+    <timezone>Europe/Berlin</timezone>
   </timezone>
-  <sound>
-    <autoinstall config:type="boolean">true</autoinstall>
-    <configure_detected config:type="boolean">true</configure_detected>
-  </sound>
 </profile>
 

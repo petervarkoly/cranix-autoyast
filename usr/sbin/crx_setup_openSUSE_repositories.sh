@@ -11,7 +11,7 @@ crx_setup_openSUSE_repositories.sh  [-v Version] [-ueh ]\n
 \t\t-h\t\tThis page\n
 "
 
-VERSION="15.3"
+VERSION="15.5"
 UPDATE="no"
 EDUCATION="no"
 TERMINALSERVER="no"
@@ -51,17 +51,19 @@ rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-full/opensuse/distribution/leap/${VERS
 if [ $UPDATE = "yes" ]; then
 	rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/oss/     /srv/ftp/akt/updates/
 	rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/non-oss/ /srv/ftp/akt/updates-non-oss/
+	rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/sle/     /srv/ftp/akt/updates-sle/
     echo "#!/bin/bash
 /usr/bin/rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/oss/     /srv/ftp/akt/updates/
 /usr/bin/rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/non-oss/ /srv/ftp/akt/updates-non-oss/
+/usr/bin/rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-updates/leap/${VERSION}/sle/     /srv/ftp/akt/updates-sle/
 " > /etc/cron.weekly/crx.openSUSE-updates
 fi
 
 #Download Education Packages
 if [ "$EDUCATION" = "yes" ]; then
-	rsync ${RSYNC_PARAMS} ${SERVER}::buildservice-repos-main/Education/openSUSE_Leap_${VERSION}/     /srv/ftp/akt/Education/
+	rsync ${RSYNC_PARAMS} ${SERVER}::buildservice-repos-main/Education/${VERSION}/     /srv/ftp/akt/education/
     echo "#!/bin/bash
-/usr/bin/rsync ${RSYNC_PARAMS} ${SERVER}::buildservice-repos-main/Education/openSUSE_Leap_${VERSION}/     /srv/ftp/akt/Education/
+/usr/bin/rsync ${RSYNC_PARAMS} ${SERVER}::buildservice-repos-main/Education/${VERSION}/     /srv/ftp/akt/education/
 " > /etc/cron.weekly/crx.Education-update
 fi
 
