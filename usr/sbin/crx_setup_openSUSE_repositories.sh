@@ -43,7 +43,7 @@ if [ -e /srv/ftp/akt/RC1/ ]; then
 fi
 
 . /etc/sysconfig/cranix
-RSYNC_PARAMS="-avz --stats --delete --delete-after --exclude=src --exclude=ppc --exclude=aarch64 --exclude=aarch64_ilp32 --exclude=armv7hl"
+RSYNC_PARAMS="-avz --stats --delete --delete-after --exclude=src --exclude=ppc64le --exclude=aarch64 --exclude=aarch64_ilp32 --exclude=armv7hl --exclude=s390x"
 
 rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-full/opensuse/distribution/leap/${VERSION}/repo/oss/     /srv/ftp/akt/CD1/
 rsync ${RSYNC_PARAMS} ${SERVER}::opensuse-full/opensuse/distribution/leap/${VERSION}/repo/non-oss/ /srv/ftp/akt/non-oss/
@@ -69,9 +69,9 @@ fi
 
 #Dowload PACMAN
 if [ "$PACKMAN" = "yes" ]; then
-    rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
+    rsync ${RSYNC_PARAMS} rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
     echo "#!/bin/bash
-rsync -avz --stats --delete --delete-after --exclude=src --exclude=ppc rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
+rsync ${RSYNC_PARAMS} rsync://ftp.halifax.rwth-aachen.de/packman/suse/openSUSE_Leap_$VERSION/ /srv/ftp/akt/packman/
 " > /etc/cron.weekly/crx.PACKMAN-update
 fi
 
